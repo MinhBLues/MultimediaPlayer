@@ -1,0 +1,125 @@
+﻿<Window x:Class="_1712597_1712602.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:_1712597_1712602"
+        mc:Ignorable="d"
+         TextElement.FontFamily="Roboto"
+        TextElement.FontSize="12"
+        Title="PLAYER" Height="500" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="LightSteelBlue">
+
+    <materialDesign:Card VerticalAlignment ="Stretch" UniformCornerRadius="0">
+        <Grid RenderTransformOrigin="0.5,0.5">
+
+
+            <materialDesign:Card UniformCornerRadius="0" Width="350" Height="300"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDCD9C8">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment ="Center" >
+                        <Ellipse Height="130" Width="130" Fill="RosyBrown" materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                        </Ellipse>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Width="300" HorizontalAlignment="Center" Margin="0,15,0,0">
+                        <TextBlock Foreground="Black" Name="timeStart" VerticalAlignment="Center" >00:00</TextBlock>
+                        <TextBlock Foreground="Black" Name="timeEnd" VerticalAlignment="Center" Margin="240,0,0,0" HorizontalAlignment="Right">05:20</TextBlock>
+                    </StackPanel>
+                    <Slider Name="sTimerMusic" Margin="15,0,15,0" Width="300" VerticalAlignment="Bottom"  Grid.Row="2" TickFrequency="5"  Orientation="Horizontal" Minimum="0"  Value="0" Foreground="#FFED7945" MouseMove="MouseMove" 
+                    PreviewMouseLeftButtonDown="MouseDown"
+                    PreviewMouseLeftButtonUp="MouseUp" />
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card UniformCornerRadius="0" Width="350" Height="200"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="White">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="5*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Width="350" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Margin="40,0,20,0">
+                            <materialDesign:PackIcon Kind="RotateRight" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"></materialDesign:PackIcon>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="36" Height="36" Click="backSong" >
+                            <materialDesign:PackIcon Kind="SkipPrevious" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"></materialDesign:PackIcon>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"  Width="56" Height="56" BorderBrush="{x:Null}" Background="{x:Null}"  BorderThickness="0" Margin="15,0" Click="playMusic">
+                            <materialDesign:PackIcon Name="piPlay"  Kind="PlayCircleOutline"  Width="56" Height="56"  Foreground="Black"></materialDesign:PackIcon>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}"  Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center" Click="nextSong">
+                            <materialDesign:PackIcon Kind="SkipNext" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"></materialDesign:PackIcon>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="36" Height="36" HorizontalAlignment="Right" Margin="20,0,0,0">
+                            <materialDesign:PackIcon Kind="ShuffleVariant" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"></materialDesign:PackIcon>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="10,20,10,10">
+                        <TextBlock Name="txbSongTitle"  FontSize="30" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center">Song Title</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal"  Margin="10,0,0,0"  >
+                        <materialDesign:PackIcon Name="piVol" Kind="Audio" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF0E0F0F" />
+                        <Slider Name="vol" Margin="15,0,15,10" VerticalAlignment="Bottom"  Grid.Row="2" TickFrequency="5" Width="240" Orientation="Horizontal" Minimum="0"  Maximum="1" Value="0.5" Foreground="#FFED7945" ValueChanged="volumeChange"  />
+                        <TextBlock Name="txbVol" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Black" FontFamily="roboto" >50</TextBlock>                 
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card UniformCornerRadius="0" Width="450" Height="150" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#FF3F3C33">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="5*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Width="350" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Click="addPlayList">
+                            <materialDesign:PackIcon Kind="PlaylistAdd" Width="30" Height="30" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
+                        </Button>
+                       </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="10,20,10,10">
+                        <TextBlock FontSize="30" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center">Song Tile</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card UniformCornerRadius="0" Width="450" Height="350" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF49473B">
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <ScrollViewer VerticalAlignment="Stretch" Width="450" VerticalContentAlignment="Stretch" Margin="0,10,0,0" >
+                        <ListView Name="lwMusic" ItemsSource="{Binding Playlists, RelativeSource={RelativeSource Mode =FindAncestor,AncestorType=Window},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5" HorizontalAlignment="Left" >
+                                        <Ellipse Fill="{Binding Brush}" Height="30" Width="30" Margin="5,0,0,0"></Ellipse>
+                                        <TextBlock Text="{Binding Title }" VerticalAlignment="Center" Margin="10,0,0,0"  Foreground="White" ></TextBlock>
+                                    </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right" >
+                                            <TextBlock Text="{Binding Artist }" VerticalAlignment="Center"  Foreground="White"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right" >
+                                            <TextBlock Text="{Binding Album }" VerticalAlignment="Center"  Foreground="White"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right" >
+                                        <TextBlock Text="{Binding Time }" VerticalAlignment="Center"  Foreground="White"></TextBlock>
+                                    </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                </StackPanel>
+            </materialDesign:Card>
+
+        </Grid>
+    </materialDesign:Card>
+</Window>
