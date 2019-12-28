@@ -22,3 +22,4 @@ D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\obj\Debug\App.baml
 D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\bin\Debug\policy.2.0.taglib-sharp.dll
 D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\bin\Debug\taglib-sharp.dll
 D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\bin\Debug\policy.2.0.taglib-sharp.config
+D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\bin\Debug\Gma.System.MouseKeyHook.dll

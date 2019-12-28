@@ -8,11 +8,10 @@
         mc:Ignorable="d"
          TextElement.FontFamily="Roboto"
         TextElement.FontSize="12"
-        Title="PLAYER" Height="500" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="LightSteelBlue">
+        Title="Music Player" Height="500" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="LightSteelBlue">
 
     <materialDesign:Card VerticalAlignment ="Stretch" UniformCornerRadius="0">
         <Grid RenderTransformOrigin="0.5,0.5">
-
 
             <materialDesign:Card UniformCornerRadius="0" Width="350" Height="300"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFDCD9C8">
                 <Grid Margin="10">
@@ -23,18 +22,18 @@
                     </Grid.RowDefinitions>
                     
                     <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment ="Center" >
-                        <Ellipse Height="130" Width="130" Fill="RosyBrown" materialDesign:ShadowAssist.ShadowDepth="Depth3">
-                        </Ellipse>
+                        <Image Height="300" Source="logo.png" Margin="0,50,0,0" RenderOptions.BitmapScalingMode="HighQuality" ></Image>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" Width="300" HorizontalAlignment="Center" Margin="0,15,0,0">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Width="300" HorizontalAlignment="Center" Margin="0,15,0,0" >
                         <TextBlock Foreground="Black" Name="timeStart" VerticalAlignment="Center" >00:00</TextBlock>
-                        <TextBlock Foreground="Black" Name="timeEnd" VerticalAlignment="Center" Margin="240,0,0,0" HorizontalAlignment="Right">05:20</TextBlock>
+                        <TextBlock Foreground="Black" Name="timeEnd" VerticalAlignment="Center" Margin="240,0,0,0" HorizontalAlignment="Right">00:00</TextBlock>
                     </StackPanel>
                     <Slider Name="sTimerMusic" Margin="15,0,15,0" Width="300" VerticalAlignment="Bottom"  Grid.Row="2" TickFrequency="5"  Orientation="Horizontal" Minimum="0"  Value="0" Foreground="#FFED7945" MouseMove="MouseMove" 
                     PreviewMouseLeftButtonDown="MouseDown"
                     PreviewMouseLeftButtonUp="MouseUp" />
                 </Grid>
             </materialDesign:Card>
+         
             <materialDesign:Card UniformCornerRadius="0" Width="350" Height="200"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="White">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -43,23 +42,24 @@
                         <RowDefinition Height="2*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Width="350" HorizontalAlignment="Center">
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Margin="40,0,20,0">
-                            <materialDesign:PackIcon Kind="RotateRight" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"></materialDesign:PackIcon>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Margin="40,0,20,0" Click="Loop_Click">
+                            <materialDesign:PackIcon Name="piRepeat" Kind="Repeat" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"/>
                         </Button>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="36" Height="36" Click="backSong" >
-                            <materialDesign:PackIcon Kind="SkipPrevious" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"></materialDesign:PackIcon>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="36" Height="36" Click="BackSong_Click" >
+                            <materialDesign:PackIcon Kind="SkipPrevious" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"/>
                         </Button>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"  Width="56" Height="56" BorderBrush="{x:Null}" Background="{x:Null}"  BorderThickness="0" Margin="15,0" Click="playMusic">
-                            <materialDesign:PackIcon Name="piPlay"  Kind="PlayCircleOutline"  Width="56" Height="56"  Foreground="Black"></materialDesign:PackIcon>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"  Width="56" Height="56" BorderBrush="{x:Null}" Background="{x:Null}"  BorderThickness="0" Margin="15,0" Click="PlayMusic_Click">
+                            <materialDesign:PackIcon Name="piPlay"  Kind="PlayCircleOutline"  Width="56" Height="56"  Foreground="Black"/>
                         </Button>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}"  Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center" Click="nextSong">
-                            <materialDesign:PackIcon Kind="SkipNext" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"></materialDesign:PackIcon>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}"  Width="36" Height="36" HorizontalAlignment="Left" VerticalAlignment="Center" Click="NextSong_Click">
+                            <materialDesign:PackIcon Kind="SkipNext" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"/>
                         </Button>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="36" Height="36" HorizontalAlignment="Right" Margin="20,0,0,0">
-                            <materialDesign:PackIcon Kind="ShuffleVariant" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"></materialDesign:PackIcon>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="36" Height="36" HorizontalAlignment="Right" Margin="20,0,0,0" Click="Shuffle_Click">
+                            <materialDesign:PackIcon Kind="ShuffleVariant" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"/>
                         </Button>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="10,20,10,10">
+                        <TextBlock Name="txbNameArtist"  FontSize="20" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center">Artist</TextBlock>
                         <TextBlock Name="txbSongTitle"  FontSize="30" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center">Song Title</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal"  Margin="10,0,0,0"  >
@@ -70,15 +70,15 @@
                 </Grid>
             </materialDesign:Card>
 
-            <materialDesign:Card UniformCornerRadius="0" Width="450" Height="150" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#FF3F3C33">
+            <materialDesign:Card UniformCornerRadius="0" Width="550" Height="150" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#FF3F3C33">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"></RowDefinition>
                         <RowDefinition Height="5*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Width="350" HorizontalAlignment="Center">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Width="500" HorizontalAlignment="Center">
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Click="addPlayList">
-                            <materialDesign:PackIcon Kind="PlaylistAdd" Width="30" Height="30" VerticalAlignment="Center" Foreground="White"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="PlaylistAdd" Width="30" Height="30" VerticalAlignment="Center" Foreground="White"/>
                         </Button>
                        </StackPanel>
                     <StackPanel Grid.Row="1" Margin="10,20,10,10">
@@ -86,38 +86,246 @@
                     </StackPanel>
                 </Grid>
             </materialDesign:Card>
-            <materialDesign:Card UniformCornerRadius="0" Width="450" Height="350" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF49473B">
-                <StackPanel Orientation="Vertical" Margin="5">
-                    <ScrollViewer VerticalAlignment="Stretch" Width="450" VerticalContentAlignment="Stretch" Margin="0,10,0,0" >
-                        <ListView Name="lwMusic" ItemsSource="{Binding Playlists, RelativeSource={RelativeSource Mode =FindAncestor,AncestorType=Window},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ItemsControl.ItemTemplate>
+       
+            <materialDesign:Card UniformCornerRadius="0" Width="550" Height="350" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF49473B">
+                <DataGrid Name="dgListSong" Margin="0 8 0 0" ItemsSource="{Binding Playlists, RelativeSource={RelativeSource Mode =FindAncestor,AncestorType=Window},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
+
+                          materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" >
+
+                    <DataGrid.Columns>
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding Number}"   Header="#" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" >
+
+                            <DataGridTextColumn.HeaderStyle>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+
+                                    <Setter Property="ContentTemplate">
+
+                                        <Setter.Value>
+
+                                            <DataTemplate>
+
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Left"/>
+
+                                            </DataTemplate>
+
+                                        </Setter.Value>
+
+                                    </Setter>
+
+                                </Style>
+
+                            </DataGridTextColumn.HeaderStyle>
+
+                            <DataGridTextColumn.ElementStyle>
+
+                                <Style TargetType="{x:Type TextBlock}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+
+                            </DataGridTextColumn.ElementStyle>
+                         
+                        </materialDesign:DataGridTextColumn>
+
+                        <DataGridTemplateColumn >
+                            <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5" HorizontalAlignment="Left" >
-                                        <Ellipse Fill="{Binding Brush}" Height="30" Width="30" Margin="5,0,0,0"></Ellipse>
-                                        <TextBlock Text="{Binding Title }" VerticalAlignment="Center" Margin="10,0,0,0"  Foreground="White" ></TextBlock>
-                                    </StackPanel>
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right" >
-                                            <TextBlock Text="{Binding Artist }" VerticalAlignment="Center"  Foreground="White"></TextBlock>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right" >
-                                            <TextBlock Text="{Binding Album }" VerticalAlignment="Center"  Foreground="White"></TextBlock>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right" >
-                                        <TextBlock Text="{Binding Time }" VerticalAlignment="Center"  Foreground="White"></TextBlock>
-                                    </StackPanel>
-                                    </Grid>
+                                    <Button  Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}"  Width="25" Height="25" Background="{x:Null}" Click="playSingleMusic"  >
+                                        <materialDesign:PackIcon   Kind="{Binding IconSong.Kind }"  Width="20" Height="20" Foreground="Black"/>
+                                    </Button>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ListView>
-                    </ScrollViewer>
-                </StackPanel>
+                               
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellStyle>
+
+                                <Style TargetType="DataGridCell">
+
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="#FF424242"/>
+
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
+                        </DataGridTemplateColumn>
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding Title}"  Width="130" Header="Title" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" >
+
+                            <DataGridTextColumn.HeaderStyle>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+
+                                    <Setter Property="ContentTemplate">
+
+                                        <Setter.Value>
+
+                                            <DataTemplate>
+
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Left"/>
+
+                                            </DataTemplate>
+
+                                        </Setter.Value>
+
+                                    </Setter>
+
+                                </Style>
+
+                            </DataGridTextColumn.HeaderStyle>
+
+                            <DataGridTextColumn.ElementStyle>
+
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+
+                            </DataGridTextColumn.ElementStyle>
+                        </materialDesign:DataGridTextColumn>
+                        <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding Artist}" Width="100" Header="Artist" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" >
+
+                            <DataGridTextColumn.HeaderStyle>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+
+                                    <Setter Property="ContentTemplate">
+
+                                        <Setter.Value>
+
+                                            <DataTemplate>
+
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Left"/>
+
+                                            </DataTemplate>
+
+                                        </Setter.Value>
+
+                                    </Setter>
+
+                                </Style>
+
+                            </DataGridTextColumn.HeaderStyle>
+
+                            <DataGridTextColumn.ElementStyle>
+
+                                <Style TargetType="{x:Type TextBlock}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+
+                            </DataGridTextColumn.ElementStyle>
+
+                        </materialDesign:DataGridTextColumn>
+
+                        <!-- set a max length to get an indicator in the editor -->
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding Ablum}" Header="Ablum" MaxLength="255" Width="100" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+
+                            <DataGridTextColumn.HeaderStyle>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+
+                                    <Setter Property="ContentTemplate">
+
+                                        <Setter.Value>
+
+                                            <DataTemplate>
+
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Left"/>
+
+                                            </DataTemplate>
+
+                                        </Setter.Value>
+
+                                    </Setter>
+
+                                </Style>
+
+                            </DataGridTextColumn.HeaderStyle>
+
+                            <DataGridTextColumn.ElementStyle>
+
+                                <Style TargetType="{x:Type TextBlock}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+
+                            </DataGridTextColumn.ElementStyle>
+
+                        </materialDesign:DataGridTextColumn>
+
+                        <materialDesign:DataGridTextColumn Binding="{Binding Time}" Header="Time" Width="70"  EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+
+                            <DataGridTextColumn.HeaderStyle>
+
+                                <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+
+                                    <Setter Property="ContentTemplate">
+
+                                        <Setter.Value>
+
+                                            <DataTemplate>
+
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" TextAlignment="Center"/>
+
+                                            </DataTemplate>
+
+                                        </Setter.Value>
+
+                                    </Setter>
+
+                                </Style>
+
+                            </DataGridTextColumn.HeaderStyle>
+
+                            <DataGridTextColumn.ElementStyle>
+
+                                <Style TargetType="{x:Type TextBlock}">
+
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+
+                            </DataGridTextColumn.ElementStyle>
+
+                        </materialDesign:DataGridTextColumn>
+                        <!-- use custom combo box column to get better combos. Use ItemsSourceBinding as your binding template to be applied to each combo -->
+                        <DataGridTemplateColumn  Header="Favorite">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}"  Width="30" Height="20" Background="{x:Null}"  HorizontalAlignment="Center" >
+                                        <materialDesign:PackIcon Kind="HeartOutline" Width="20" Height="20" Foreground="Black"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellStyle>
+
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="#FF424242"/>
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+
+                </DataGrid>
             </materialDesign:Card>
 
         </Grid>
