@@ -6,9 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:_1712597_1712602"
         mc:Ignorable="d"
-         TextElement.FontFamily="Roboto"
+        TextElement.FontFamily="Roboto"
         TextElement.FontSize="12"
-        Title="Music Player" Height="500" Width="900" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="LightSteelBlue">
+        Loaded="Window_Loaded"
+        Title="MM Music" Height="530" Width="900" WindowStartupLocation="CenterScreen"  Foreground="LightSteelBlue">
 
     <materialDesign:Card VerticalAlignment ="Stretch" UniformCornerRadius="0">
         <Grid RenderTransformOrigin="0.5,0.5">
@@ -42,8 +43,8 @@
                         <RowDefinition Height="2*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Width="350" HorizontalAlignment="Center">
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Margin="40,0,20,0" Click="Loop_Click">
-                            <materialDesign:PackIcon Name="piRepeat" Kind="Repeat" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"/>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="Resource name: MaterialDesignRaisedLightButton" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Margin="40,0,20,0" Click="Loop_Click">
+                            <materialDesign:PackIcon Name="piRepeat" Kind="Repeat" Width="30" Height="30" VerticalAlignment="Center" Foreground="Gray"/>
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="36" Height="36" Click="BackSong_Click" >
                             <materialDesign:PackIcon Kind="SkipPrevious" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"/>
@@ -55,12 +56,12 @@
                             <materialDesign:PackIcon Kind="SkipNext" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"/>
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="36" Height="36" HorizontalAlignment="Right" Margin="20,0,0,0" Click="Shuffle_Click">
-                            <materialDesign:PackIcon Kind="ShuffleVariant" Width="30" Height="30" VerticalAlignment="Center" Foreground="Black"/>
+                            <materialDesign:PackIcon  Name="piShuffle" Kind="ShuffleDisabled" Width="30" Height="30" VerticalAlignment="Center" Foreground="Gray"/>
                         </Button>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="10,20,10,10">
-                        <TextBlock Name="txbNameArtist"  FontSize="20" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center">Artist</TextBlock>
-                        <TextBlock Name="txbSongTitle"  FontSize="30" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center">Song Title</TextBlock>
+                        <TextBlock Name="txbNameArtist"  FontSize="20" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center"/>
+                        <TextBlock Name="txbSongTitle"  FontSize="30" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center">MMM</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal"  Margin="10,0,0,0"  >
                         <materialDesign:PackIcon Name="piVol" Kind="Audio" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF0E0F0F" />
@@ -70,27 +71,69 @@
                 </Grid>
             </materialDesign:Card>
 
-            <materialDesign:Card UniformCornerRadius="0" Width="550" Height="150" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#FF3F3C33">
+            <materialDesign:Card UniformCornerRadius="0" Width="550" Height="150" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#1E3D59">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"></RowDefinition>
-                        <RowDefinition Height="5*"></RowDefinition>
+                        <RowDefinition Height="2.5*"/>
+                        <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Width="500" HorizontalAlignment="Center">
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Click="addPlayList">
-                            <materialDesign:PackIcon Kind="PlaylistAdd" Width="30" Height="30" VerticalAlignment="Center" Foreground="White"/>
-                        </Button>
-                       </StackPanel>
-                    <StackPanel Grid.Row="1" Margin="10,20,10,10">
-                        <TextBlock FontSize="30" FontFamily="Roboto" Foreground="Black" HorizontalAlignment="Center">Song Tile</TextBlock>
+                        <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" Foreground="White" PlacementMode="RightAndAlignMiddles" ToggleCheckedContentCommandParameter="wowsers" Width="40" Height="40" Background="#408ec6" >
+                            <materialDesign:PopupBox.ToggleCheckedContent>
+                                <materialDesign:PackIcon  Kind="Buffer" Width="25"  Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </materialDesign:PopupBox.ToggleCheckedContent>
+                            <StackPanel Orientation="Horizontal">
+                                <Button ToolTip="Add PlayList" Click="addPlayList">
+                                    <materialDesign:PackIcon Kind="PlaylistAdd" Width="25" Height="25" VerticalAlignment="Center" Foreground="Black" HorizontalAlignment="Center" />
+                                </Button>
+                                <Button ToolTip="Load PlayList"  Click="Load_Click">
+                                    <materialDesign:PackIcon Kind="Album" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
+                                </Button>
+                                <materialDesign:DialogHost DialogClosing="Sample1_DialogHost_OnDialogClosing" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <materialDesign:DialogHost.DialogContent>
+
+                                        <StackPanel Margin="16">
+
+                                            <TextBlock>Add a new playlist.</TextBlock>
+
+                                            <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" Name="txbNewName" />
+                                            <StackPanel Name="ManyCheckBoxes" Orientation="Horizontal" HorizontalAlignment="Right" >
+                                                <CheckBox Checked="Check_Click" Margin="0,0,10,0" Name="checkTxt" Content=".txt" IsChecked="True" Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                <CheckBox Checked="Check_Click" Name="checkXml" Content=".xml" Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}" Content="ACCEPT"  IsDefault="True" Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand" Click="Accept_Click"/>
+
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"  Content="CANCEL" IsCancel="True"  Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand"/>
+
+                                            </StackPanel>
+
+                                        </StackPanel>
+
+                                    </materialDesign:DialogHost.DialogContent>
+                                    <Button ToolTip="Save PlayList" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                                        <materialDesign:PackIcon  Kind="PlaylistCheck" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
+                                    </Button>
+                                </materialDesign:DialogHost>
+                                <Button ToolTip="Load WishList" Click="LoadWishList_Click">
+                                    <materialDesign:PackIcon Kind="Heart" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#ca1f7b" />
+                                </Button>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="0" Orientation="Horizontal">
+                        <TextBlock Margin="50,0,0,0" Width="60" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#f5f0e1" Name="txbQuatitySong">0 Song /</TextBlock>
+                        <TextBlock Width="50" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#f5f0e1" Name="txbTotalTime">00:00</TextBlock>
+                        <Image Margin="15,0,0,0" Width="200" Height="100" Source="LogoT.png" HorizontalAlignment="Center" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </StackPanel>
                 </Grid>
             </materialDesign:Card>
-       
-            <materialDesign:Card UniformCornerRadius="0" Width="550" Height="350" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#FF49473B">
-                <DataGrid Name="dgListSong" Margin="0 8 0 0" ItemsSource="{Binding Playlists, RelativeSource={RelativeSource Mode =FindAncestor,AncestorType=Window},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
 
-                          materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" >
+            <materialDesign:Card UniformCornerRadius="0" Width="550" Height="320" Margin="0,0,0,30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#408ec6">
+                <DataGrid HorizontalScrollBarVisibility = "Disabled" Name="dgListSong" Margin="0 8 0 0" ItemsSource="{Binding Playlists, RelativeSource={RelativeSource Mode =FindAncestor,AncestorType=Window},Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
+
+                          materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" PreviewMouseLeftButtonUp="MouseUp_DataGrid" >
 
                     <DataGrid.Columns>
 
@@ -230,13 +273,13 @@
 
                         <!-- set a max length to get an indicator in the editor -->
 
-                        <materialDesign:DataGridTextColumn Binding="{Binding Ablum}" Header="Ablum" MaxLength="255" Width="100" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
+                        <materialDesign:DataGridTextColumn Binding="{Binding Album}" Header="Album" MaxLength="255" Width="100" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}">
 
                             <DataGridTextColumn.HeaderStyle>
 
                                 <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
 
-                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
 
                                     <Setter Property="ContentTemplate">
 
@@ -260,7 +303,7 @@
 
                                 <Style TargetType="{x:Type TextBlock}">
 
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
                                     <Setter Property="VerticalAlignment" Value="Center" />
                                 </Style>
 
@@ -309,9 +352,12 @@
                         <DataGridTemplateColumn  Header="Favorite">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}"  Width="30" Height="20" Background="{x:Null}"  HorizontalAlignment="Center" >
+                                  <!--  <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}"  Width="30" Height="20" Background="{x:Null}"  HorizontalAlignment="Center" >
                                         <materialDesign:PackIcon Kind="HeartOutline" Width="20" Height="20" Foreground="Black"/>
-                                    </Button>
+                                    </Button>-->
+                                    <ToggleButton Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" ToolTip="MaterialDesignFlatPrimaryToggleButton"  IsChecked ="{Binding IsFav}" Unchecked="UnWish_Click" Checked="Wish_Click">
+                                        <materialDesign:PackIcon Kind="HeartOutline" Height="21" Width="21" />
+                                    </ToggleButton>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellStyle>
@@ -327,7 +373,12 @@
 
                 </DataGrid>
             </materialDesign:Card>
-
+           
+            <materialDesign:Card UniformCornerRadius="0"   Width="550" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="#408ec6">
+                <Button Name="btnDelete" Margin="0,0,10,0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Width="30" Height="30" HorizontalAlignment="Right" Click="Delete_Click">
+                    <materialDesign:PackIcon Kind="DeleteForever" Width="30" Height="30" VerticalAlignment="Center" Background="#408ec6" Foreground="White"/>
+                </Button>
+            </materialDesign:Card>
         </Grid>
     </materialDesign:Card>
 </Window>

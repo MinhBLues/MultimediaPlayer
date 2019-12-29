@@ -19,8 +19,7 @@ namespace _1712597_1712602
         private string title;
         private int number;
         private PackIcon iconSong;
-
-
+        private bool isFav;
 
         private Brush brush = Brushes.Transparent;
         public SongMode() { }
@@ -34,8 +33,12 @@ namespace _1712597_1712602
         public Brush Brush { get => brush; set => brush = value; }
         public int Number { get => number; set => number = value; }
         public PackIcon IconSong { get => iconSong; set => iconSong = value; }
+        public int Timetotal { get => timetotal; set => timetotal = value; }
+        public bool IsFav { get => isFav; set => isFav = value; }
 
         private Random rnd = new Random();
+
+        private int timetotal;
         public SongMode(string path)
         {
 
@@ -45,10 +48,11 @@ namespace _1712597_1712602
             this.name =  converter.Convert(fullname.Name, null, null, null).ToString();
 
             TagLib.File tagFile = TagLib.File.Create(path);
-            this.artist = tagFile.Tag.FirstAlbumArtist;
+            this.artist = tagFile.Tag.FirstArtist;
             this.album = tagFile.Tag.Album;
             this.title = tagFile.Tag.Title;
             this.time = tagFile.Properties.Duration.ToString(@"mm\:ss");
+            this.timetotal = tagFile.Properties.Duration.Hours * 3600 + tagFile.Properties.Duration.Minutes * 60 + tagFile.Properties.Duration.Seconds;
             if (this.title == null)
             {
                 this.title = name;
@@ -58,7 +62,9 @@ namespace _1712597_1712602
             this.brush = new SolidColorBrush(randomColor);
 
             iconSong = new PackIcon();
-            iconSong.Kind = PackIconKind.PlayCircleOutline;
+            iconSong.Kind = PackIconKind.Play;
+
+            this.isFav = false;
         }
         public SongMode(string name, string time)
         {

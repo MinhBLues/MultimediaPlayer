@@ -23,3 +23,28 @@ D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\bin\Debug\policy.2.0.t
 D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\bin\Debug\taglib-sharp.dll
 D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\bin\Debug\policy.2.0.taglib-sharp.config
 D:\NAM 3\LTW_C#\Đồ án\1712597_1712602\1712597_1712602\bin\Debug\Gma.System.MouseKeyHook.dll
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\1712597_1712602.exe.config
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\1712597_1712602.exe
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\1712597_1712602.pdb
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\Gma.System.MouseKeyHook.dll
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\MaterialDesignColors.dll
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\taglib-sharp.dll
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\MaterialDesignColors.pdb
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\bin\Debug\policy.2.0.taglib-sharp.config
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\1712597_1712602.csprojAssemblyReference.cache
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\MainWindow.g.cs
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\App.g.cs
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\1712597_1712602_MarkupCompile.cache
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\1712597_1712602_MarkupCompile.lref
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\App.baml
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\MainWindow.baml
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\1712597_1712602.g.resources
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\_1712597_1712602.Properties.Resources.resources
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\1712597_1712602.csproj.GenerateResource.cache
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\1712597_1712602.csproj.CopyComplete
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\1712597_1712602.exe
+C:\Users\MinhP\OneDrive\Documents\MultimediaPlayer\1712597_1712602\1712597_1712602\obj\Debug\1712597_1712602.pdb
