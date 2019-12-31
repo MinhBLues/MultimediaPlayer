@@ -32,10 +32,10 @@ namespace _1712597_1712602
         public MainWindow()
         {
             InitializeComponent();
-            Closing += new System.ComponentModel.CancelEventHandler(MainWindow_Closing);
+            Closing += new CancelEventHandler(MainWindow_Closing);
         }
 
-        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             try
             {
@@ -51,8 +51,19 @@ namespace _1712597_1712602
                 }
 
                 writer.Close();
+
+                SongLists.Clear();
+
+                foreach (var item in WishLists)
+                {
+                    SongLists.Add(item);
+                }
+
+                SaveList("WishList.txt");
             }
             catch { }
+
+           
         }
 
         MediaPlayer _player = new MediaPlayer();
@@ -316,119 +327,6 @@ namespace _1712597_1712602
 
         #endregion
 
-        private void volumeChange(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            try
-            {
-                txbVol.Text = ((int)(vol.Value * 100)).ToString();
-                if (vol.Value == 0)
-                {
-                    piVol.Kind = PackIconKind.VolumeOff;
-                }
-                else
-                {
-                    if (vol.Value < 0.5)
-                    {
-                        piVol.Kind = PackIconKind.VolumeMedium;
-                    }
-                    else
-                        piVol.Kind = PackIconKind.VolumeHigh;
-                }
-                _player.Volume = e.NewValue;
-            }
-            catch { }
-        }
-
-        int number = 0;
-        int totaltime = 0;
-        private void addPlayList(object sender, RoutedEventArgs e)
-        {
-            var screen = new Microsoft.Win32.OpenFileDialog();
-            screen.Filter = "Music (.mp3)|*.mp3|ALL Files (*.*)|*.*";
-            screen.Multiselect = true;
-            try
-            {
-                if (screen.ShowDialog() == true)
-                {
-                    foreach (var item in screen.FileNames)
-                    {
-                        SongLists.Add(new SongMode(item));
-                        SongLists[number].Number = number + 1;
-                        totaltime += SongLists[number].Timetotal;
-                        number++;
-                    }
-                    txbQuatitySong.Text = number + " Songs /";
-
-                    int hour = totaltime / 3600;
-                    int min = (totaltime - hour * 3600) / 60;
-                    int sec = totaltime - hour * 3600 - min * 60;
-
-                    txbTotalTime.Text = hour + ":" + min + ":" + sec;
-                }
-            }
-            catch { }
-
-        }
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-
-            bool isS = false;
-            if (dgListSong.SelectedIndex >= 0)
-            {
-                for (int i = dgListSong.SelectedItems.Count - 1; i >= 0; i--) 
-                {
-                    if (SongLists[index] == dgListSong.SelectedItems[i] as SongMode)
-                    {
-                        isS = true;
-                    }
-                    totaltime -= (dgListSong.SelectedItems[i] as SongMode).Timetotal;
-                   SongLists.Remove(dgListSong.SelectedItems[i] as SongMode);
-                }
-            }
-            if (isS)
-            {
-                lastIndex.Remove(index);
-                var j = (new Random()).Next(SongLists.Count);
-                index = j;
-                PlaySelectedIndex(index);
-                lastIndex.Add(index);
-                SongLists[index].IconSong.Kind = PackIconKind.Poll;
-                
-            }
-           
-            for (int j = 0; j < SongLists.Count; j++)
-            {
-                SongLists[j].Number = j + 1;
-                number++;
-            }
-
-            txbQuatitySong.Text = number + " Songs /";
-
-            int hour = totaltime / 3600;
-            int min = (totaltime - hour * 3600) / 60;
-            int sec = totaltime - hour * 3600 - min * 60;
-
-            txbTotalTime.Text = hour + ":" + min + ":" + sec;
-            btnDelete.Visibility = Visibility.Hidden;
-
-
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += timer_Tick;
-            _hook = Hook.GlobalEvents();
-            _hook.KeyUp += KeyUp_hook;
-            btnDelete.Visibility = Visibility.Hidden;
-            if (!Directory.Exists($"{AppDomain.CurrentDomain.BaseDirectory}PlayList"))  Directory.CreateDirectory($"{AppDomain.CurrentDomain.BaseDirectory}PlayList");
-            LoadListHistory();
-            LoadWishList();
-        }
-        private void MouseUp_DataGrid(object sender, MouseButtonEventArgs e)
-        {
-            if (dgListSong.SelectedIndex >= 0) btnDelete.Visibility = Visibility.Visible;
-        }
         
         #region Check File
         private void Check_Click(object sender, RoutedEventArgs e)  => uncheckCheckBoxes(sender);
@@ -628,12 +526,13 @@ namespace _1712597_1712602
 
             try
             {
-                if (!SongLists[indexWish].IsFav)
+                if (SongLists[indexWish].IsFav)
                 {
                     WishLists.RemoveAt(indexWish);
                 }
                 else
                 {
+                    SongLists[indexWish].IsFav = true;
                     WishLists.Add(SongLists[indexWish]);
                     WishLists[WishLists.Count - 1].Number = WishLists.Count;
                 }
@@ -658,7 +557,119 @@ namespace _1712597_1712602
             }
             catch { }
         }
+        private void volumeChange(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            try
+            {
+                txbVol.Text = ((int)(vol.Value * 100)).ToString();
+                if (vol.Value == 0)
+                {
+                    piVol.Kind = PackIconKind.VolumeOff;
+                }
+                else
+                {
+                    if (vol.Value < 0.5)
+                    {
+                        piVol.Kind = PackIconKind.VolumeMedium;
+                    }
+                    else
+                        piVol.Kind = PackIconKind.VolumeHigh;
+                }
+                _player.Volume = e.NewValue;
+            }
+            catch { }
+        }
 
+        int number = 0;
+        int totaltime = 0;
+        private void addPlayList(object sender, RoutedEventArgs e)
+        {
+            var screen = new Microsoft.Win32.OpenFileDialog();
+            screen.Filter = "Music (.mp3)|*.mp3|ALL Files (*.*)|*.*";
+            screen.Multiselect = true;
+            try
+            {
+                if (screen.ShowDialog() == true)
+                {
+                    foreach (var item in screen.FileNames)
+                    {
+                        SongLists.Add(new SongMode(item));
+                        SongLists[number].Number = number + 1;
+                        totaltime += SongLists[number].Timetotal;
+                        number++;
+                    }
+                    txbQuatitySong.Text = number + " Songs /";
+
+                    int hour = totaltime / 3600;
+                    int min = (totaltime - hour * 3600) / 60;
+                    int sec = totaltime - hour * 3600 - min * 60;
+
+                    txbTotalTime.Text = hour + ":" + min + ":" + sec;
+                }
+            }
+            catch { }
+
+        }
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+            bool isS = false;
+            if (dgListSong.SelectedIndex >= 0)
+            {
+                for (int i = dgListSong.SelectedItems.Count - 1; i >= 0; i--)
+                {
+                    if (SongLists[index] == dgListSong.SelectedItems[i] as SongMode)
+                    {
+                        isS = true;
+                    }
+                    totaltime -= (dgListSong.SelectedItems[i] as SongMode).Timetotal;
+                    SongLists.Remove(dgListSong.SelectedItems[i] as SongMode);
+                }
+            }
+            if (isS)
+            {
+                lastIndex.Remove(index);
+                var j = (new Random()).Next(SongLists.Count);
+                index = j;
+                PlaySelectedIndex(index);
+                lastIndex.Add(index);
+                SongLists[index].IconSong.Kind = PackIconKind.Poll;
+
+            }
+
+            for (int j = 0; j < SongLists.Count; j++)
+            {
+                SongLists[j].Number = j + 1;
+                number++;
+            }
+
+            txbQuatitySong.Text = number + " Songs /";
+
+            int hour = totaltime / 3600;
+            int min = (totaltime - hour * 3600) / 60;
+            int sec = totaltime - hour * 3600 - min * 60;
+
+            txbTotalTime.Text = hour + ":" + min + ":" + sec;
+            btnDelete.Visibility = Visibility.Hidden;
+
+
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += timer_Tick;
+            _hook = Hook.GlobalEvents();
+            _hook.KeyUp += KeyUp_hook;
+            btnDelete.Visibility = Visibility.Hidden;
+            if (!Directory.Exists($"{AppDomain.CurrentDomain.BaseDirectory}PlayList")) Directory.CreateDirectory($"{AppDomain.CurrentDomain.BaseDirectory}PlayList");
+            LoadListHistory();
+            LoadWishList();
+        }
+        private void MouseUp_DataGrid(object sender, MouseButtonEventArgs e)
+        {
+            if (dgListSong.SelectedIndex >= 0) btnDelete.Visibility = Visibility.Visible;
+        }
     }
 
 }
